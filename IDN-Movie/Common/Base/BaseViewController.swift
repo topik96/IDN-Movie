@@ -11,6 +11,10 @@ import UIKit
 class BaseViewController: UIViewController {
     
     // MARK: - Life Cycle -
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         _setupDefaultView()
@@ -18,6 +22,7 @@ class BaseViewController: UIViewController {
     
     private func _setupDefaultView() {
         _setupStatusBar()
+        _setupNavigationBar()
         view.backgroundColor = IDNColor().getColor(.basicGray)
     }
     
@@ -44,5 +49,18 @@ class BaseViewController: UIViewController {
             let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
             statusBar?.backgroundColor = IDNColor().getColor(.basicLightGray)
         }
+    }
+    
+    private func _setupNavigationBar() {
+        switch self {
+        case is HomeLandingViewController, is SearchViewController, is FavoriteViewController:
+            navigationItem.titleView = NavBarLogoView(frame: .zero)
+        default:
+            navigationItem.titleView = nil
+        }
+        tabBarController?.navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationController?.navigationBar.backgroundColor = IDNColor().getColor(.basicLightGray)
+        navigationController?.navigationBar.barTintColor = IDNColor().getColor(.basicWhite)
+        navigationController?.navigationBar.tintColor = IDNColor().getColor(.basicWhite)
     }
 }

@@ -10,6 +10,7 @@ import UIKit
 
 protocol WireframeInterface {
     func showNoNetworkAlert()
+    func showGeneralErrorAlert()
 }
 
 class BaseWireframe {
@@ -35,6 +36,10 @@ extension BaseWireframe {
 }
 
 extension BaseWireframe: WireframeInterface {
+    func showGeneralErrorAlert() {
+        
+    }
+    
     func showNoNetworkAlert() {
         
     }

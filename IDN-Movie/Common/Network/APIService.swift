@@ -11,7 +11,7 @@ import Alamofire
 typealias IDNResponse<T: Codable> = (T?, Error?) -> Void
 
 protocol APIConfig {
-    var endpoint: String { get set }
+    var endpoint: String { get set}
     var method: HTTPMethod { get set }
     var params: Parameters? { get set }
     var encoding: ParameterEncoding { get set }
@@ -20,11 +20,18 @@ protocol APIConfig {
 
 extension APIConfig {
     var method: HTTPMethod {
-        return .get
+        get { return .get }
+        set { }
     }
     
     var headers: HTTPHeaders {
-        return [:]
+        get { return [:] }
+        set { }
+    }
+    
+    var encoding: ParameterEncoding {
+        get { return URLEncoding.default }
+        set { }
     }
 }
 
@@ -37,7 +44,8 @@ final class APIService<T: Codable> {
                                      encoding: setup.encoding,
                                      headers: setup.headers).responseJSON(completionHandler: { response in
                 switch response.result {
-                case .success(_):
+                case .success(let json):
+                    print("SUCCES RESPONSE => \(json)")
                     do {
                         guard let data = response.data else { return }
                         let decoder = JSONDecoder()
@@ -47,6 +55,7 @@ final class APIService<T: Codable> {
                         completion(nil, error)
                     }
                 case .failure(let error):
+                    print("ERROR RESPONSE => \(error)")
                     if let error = error as NSError? {
                         completion(nil, error)
                     }

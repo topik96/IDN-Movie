@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 enum MovieDetailNavigationOption {
    
@@ -20,11 +21,12 @@ protocol MovieDetailViewInterface: ViewInterface {
 }
 
 protocol MovieDetailPresenterInterface: PresenterInterface {
-   
+    
 }
 
 protocol MovieDetailInteractorInterface: InteractorInterface {
-   
+    @discardableResult
+    func retrieveMovieDetail(paramRequest: MovieParamRequest, completion: @escaping IDNResponse<Movie>) -> DataRequest
 }
 
 

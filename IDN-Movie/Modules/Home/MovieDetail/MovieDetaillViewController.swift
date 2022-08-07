@@ -15,9 +15,16 @@ class MovieDetailViewController: BaseViewController {
     var presenter: MovieDetailPresenterInterface!
     
     // MARK: - Life Cycles -
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+       
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tabBarController?.navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationController?.navigationBar.backgroundColor = IDNColor().getColor(.basicLightGray)
     }
 }
 

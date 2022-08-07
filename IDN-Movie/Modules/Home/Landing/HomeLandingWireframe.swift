@@ -22,6 +22,9 @@ final class HomeLandingWireframe: BaseWireframe {
 
 extension HomeLandingWireframe: HomeLandingWireframeInterface {
     func navigate(to option: HomeLandingNavigationOption) {
-        
+        switch option {
+        case .movieDetail(let movie):
+            navigationController?.pushWireframe(MovieDetailWireframe(movie: movie), hideTabBar: true)
+        }
     }
 }
