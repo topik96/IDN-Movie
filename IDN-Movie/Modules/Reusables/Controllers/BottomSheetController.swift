@@ -125,7 +125,6 @@ private extension BottomsheetController {
     func performPresentAnimation() {
         if self._containerView.isHidden {
             self._containerView.isHidden = false
-            self._containerView.translatesAutoresizingMaskIntoConstraints = true
             let yorigin = self._containerView.frame.origin.y
             self._containerView.frame.origin.y = UIScreen.main.bounds.size.height
             UIView.animate(withDuration: 0.3) { [weak self] in

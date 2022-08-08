@@ -25,8 +25,8 @@ final class TabBarControllerWireframe: BaseWireframe {
             TabBarItemViewModel(title: "Search",
                                 image: IDNImage().getImage(.search),
                                 wireframe: SearchWireframe()),
-            TabBarItemViewModel(title: "Favorite",
-                                image: IDNImage().getImage(.favorite),
+            TabBarItemViewModel(title: "Saved",
+                                image: IDNImage().getImage(.save),
                                 wireframe: FavoriteWireframe())
         ]
         
