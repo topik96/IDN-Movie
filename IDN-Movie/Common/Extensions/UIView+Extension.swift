@@ -12,8 +12,8 @@ extension UIView {
     func fromNib<T: UIView>(nibName: String, isInherited: Bool = false) -> T? {
         let bundle = Bundle(for: type(of: self))
         guard let contentView = bundle.loadNibNamed(nibName,
-                                                     owner: self,
-                                                     options: nil)?.first as? T else {
+                                                    owner: self,
+                                                    options: nil)?.first as? T else {
             return nil
         }
         contentView.backgroundColor = .clear
@@ -68,4 +68,11 @@ extension UIView {
         }
     }
     
+    func roundCorners(corners: UIRectCorner,
+                      radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        layer.mask = mask
+    }
 }

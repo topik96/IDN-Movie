@@ -36,10 +36,14 @@ final class SearchPresenter {
     }
     
     private func _retrieveMovies(_ title: String) {
-        let param = MovieParamRequest(searchTitle: title)
+        let param = MovieParamRequest(searchTitle: title, type: .series)
+        _view.showProgressHUD(showsTransparentLayer: true)
         _interactor.retrieveMovieSearch(paramRequest: param, completion: { [weak self] (response, error) in
             guard let self = self else { return }
-            self._handleMoviesResult(response, error)
+            self._view.hideProgressHUD { [weak self] in
+                guard let self = self else { return }
+                self._handleMoviesResult(response, error)
+            }
         })
     }
     
@@ -50,7 +54,7 @@ final class SearchPresenter {
             if let err = error as NSError?, err.code == IDNErrorCode.noConnection.rawValue {
                 self._wireframe.showNoNetworkAlert()
             } else {
-                self._wireframe.showGeneralErrorAlert()
+                self._wireframe.showGeneralErrorAlert(error?.localizedDescription)
             }
         }
     }

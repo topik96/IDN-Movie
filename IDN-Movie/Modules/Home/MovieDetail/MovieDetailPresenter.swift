@@ -50,9 +50,13 @@ final class MovieDetailPresenter {
     
     private func _retrieveMovieDetail() {
         let paramRequest = MovieParamRequest(movieId: _movie?.id ?? "")
+        _view.showProgressHUD(showsTransparentLayer: true)
         _interactor.retrieveMovieDetail(paramRequest: paramRequest) { [weak self] (response, error) in
             guard let self = self else { return }
-            self._handleMovieDetailResult(response, error)
+            self._view.hideProgressHUD { [weak self] in
+                guard let self = self else { return }
+                self._handleMovieDetailResult(response, error)
+            }
         }
     }
     
@@ -63,7 +67,7 @@ final class MovieDetailPresenter {
             if let err = error as NSError?, err.code == IDNErrorCode.noConnection.rawValue {
                 self._wireframe.showNoNetworkAlert()
             } else {
-                self._wireframe.showGeneralErrorAlert()
+                self._wireframe.showGeneralErrorAlert(error?.localizedDescription)
             }
         }
     }

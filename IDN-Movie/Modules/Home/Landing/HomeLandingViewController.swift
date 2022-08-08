@@ -48,7 +48,10 @@ extension HomeLandingViewController: HomeLandingViewInterface {
     func reloadData() {
         Dispatch.main { [weak self] in
             guard let self = self else { return }
-            self.tableView.reloadData()
+            UIView.transition(with: self.tableView,
+                              duration: 0.35,
+                              options: .transitionFlipFromTop,
+                              animations: { self.tableView.reloadData() })
         }
     }
 }

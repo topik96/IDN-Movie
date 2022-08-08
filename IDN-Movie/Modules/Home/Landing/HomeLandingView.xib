@@ -22,9 +22,6 @@
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="hg9-sm-hl9">
                     <rect key="frame" x="0.0" y="68" width="414" height="794"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-                    </userDefinedRuntimeAttributes>
                 </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
@@ -35,9 +32,6 @@
                 <constraint firstItem="hg9-sm-hl9" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="n3h-8p-S7e"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="hg9-sm-hl9" secondAttribute="trailing" id="yLc-4n-Ghc"/>
             </constraints>
-            <userDefinedRuntimeAttributes>
-                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-            </userDefinedRuntimeAttributes>
             <point key="canvasLocation" x="139" y="98"/>
         </view>
     </objects>

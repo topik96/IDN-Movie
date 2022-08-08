@@ -24,9 +24,6 @@
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-                    </userDefinedRuntimeAttributes>
                 </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
@@ -38,9 +35,6 @@
                 <constraint firstItem="Jux-PU-Vta" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="24" id="sJG-RN-S0D"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <userDefinedRuntimeAttributes>
-                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-            </userDefinedRuntimeAttributes>
             <point key="canvasLocation" x="137.68115942028987" y="378.34821428571428"/>
         </view>
     </objects>

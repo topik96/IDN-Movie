@@ -48,7 +48,7 @@ final class HomeLandingPresenter {
             MovieParamRequest(searchTitle: "New", year: "2022", type: .series),
             MovieParamRequest(searchTitle: "New", year: "2022", type: .movie)
         ]
-        isLoading = true
+        _view.showProgressHUD(showsTransparentLayer: true)
         for (index, paramRequest) in paramRequests.enumerated() {
             _dispatchGroup.enter()
             _interactor.retrieveMovieSearch(paramRequest: paramRequest, completion: { [weak self] (response, error) in
@@ -70,7 +70,7 @@ final class HomeLandingPresenter {
             if let err = error as NSError?, err.code == IDNErrorCode.noConnection.rawValue {
                 self._wireframe.showNoNetworkAlert()
             } else {
-                self._wireframe.showGeneralErrorAlert()
+                self._wireframe.showGeneralErrorAlert(error?.localizedDescription)
             }
         }
     }
@@ -82,8 +82,10 @@ extension HomeLandingPresenter: HomeLandingPresenterInterface {
         _retrieveMovies()
         _dispatchGroup.notify(queue: DispatchQueue.global()) { [weak self] in
             guard let self = self else { return }
-            self.isLoading = false
-            self._setupViewModel()
+            self._view.hideProgressHUD { [weak self] in
+                guard let self = self else { return }
+                self._setupViewModel()
+            }
         }
     }
     

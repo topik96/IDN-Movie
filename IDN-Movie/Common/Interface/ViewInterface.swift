@@ -6,9 +6,29 @@
 //
 
 import Foundation
+import UIKit
 
 protocol ViewInterface {
-    
+    func hideProgressHUD(view: UIView)
+    func hideProgressHUD(completion: (() -> Void)?)
+    func showProgressHUD(showsTransparentLayer: Bool)
 }
 
+// MARK: - Extensions -
+
+extension ViewInterface {
+    func hideProgressHUD(view: UIView) { }
+    
+    func showProgressHUD(showsTransparentLayer: Bool = false) {
+        Dispatch.main {
+            LoaderViewController.show(showsTransparentLayer: showsTransparentLayer)
+        }
+    }
+    
+    func hideProgressHUD(completion: (() -> Void)? = nil) {
+        Dispatch.main {
+            LoaderViewController.hide(completion: completion)
+        }
+    }
+}
 
