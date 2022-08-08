@@ -20,6 +20,6 @@ extension MovieData {
     @NSManaged public var title: String?
     @NSManaged public var year: String?
     @NSManaged public var type: String?
-    @NSManaged public var savedDate: Date?
+    @NSManaged public var savedDate: Date?e
 
 }

@@ -13,6 +13,16 @@ protocol WireframeInterface {
     func showGeneralErrorAlert()
 }
 
+extension WireframeInterface {
+    func showNoNetworkAlert() {
+        
+    }
+    
+    func showGeneralErrorAlert() {
+        
+    }
+}
+
 class BaseWireframe {
     fileprivate var _viewController: UIViewController?
     

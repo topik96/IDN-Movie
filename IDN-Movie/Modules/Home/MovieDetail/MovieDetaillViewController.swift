@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import SkeletonView
 import Kingfisher
 
 class MovieDetailViewController: BaseViewController {
@@ -31,7 +30,6 @@ class MovieDetailViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        _setupFavoriteButton()
         _setupTableView()
         _setupHeaderView()
         _updateNavigationBarAlpha(-_topInset)
@@ -44,6 +42,7 @@ class MovieDetailViewController: BaseViewController {
         tableView.separatorStyle = .none
         tableView.backgroundColor = .clear
         tableView.contentInset = UIEdgeInsets(top: _topInset, left: 0, bottom: 0, right: 0)
+        tableView.accessibilityIdentifier = "tableView"
         if #available(iOS 15.0, *) {
             tableView.sectionHeaderTopPadding = 0.0
         }
@@ -59,12 +58,14 @@ class MovieDetailViewController: BaseViewController {
         tableView.tableHeaderView = headerView
     }
     
-    private func _setupFavoriteButton() {
-        let image = IDNImage().getImage(.favorite)?.withRenderingMode(.alwaysOriginal)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: image,
-                                                            style: .plain,
-                                                            target: self,
-                                                            action: #selector(_didFavoriteButtonTapped))
+    private func _setupFavoriteButton(_ isSaved: Bool) {
+        var image: UIImage?
+        if isSaved {
+            image = IDNImage().getImage(.saveRed)
+        } else {
+            image = IDNImage().getImage(.saveWhite)
+        }
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: image?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(_didFavoriteButtonTapped))
     }
     
     private func _updateNavigationBarAlpha(_ offsetY: CGFloat = -165.0) {
@@ -85,7 +86,7 @@ class MovieDetailViewController: BaseViewController {
     }
     
     @objc private func _didFavoriteButtonTapped() {
-        
+        presenter.didSaveButtonTapped()
     }
 }
 
@@ -98,6 +99,10 @@ extension MovieDetailViewController: MovieDetailViewInterface {
             self.tableView.reloadData()
             self._setupHeaderView()
         }
+    }
+    
+    func updateSaveMovieStatus(_ isSaved: Bool) {
+        _setupFavoriteButton(isSaved)
     }
 }
 

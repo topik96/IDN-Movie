@@ -1,10 +1,13 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-def pods
+def main_pods
   pod 'Alamofire', '~> 4.7'
   pod 'Kingfisher'
-  pod 'SkeletonView'
+end
+
+def xctest_pods 
+  pod 'Alamofire', '~> 4.7'
 end
 
 target 'IDN-Movie' do
@@ -12,6 +15,16 @@ target 'IDN-Movie' do
   use_frameworks!
 
   # Pods for IDN-Movie
-  pods
+  main_pods
+
+  target 'IDN-MovieTests' do
+    inherit! :search_paths
+    # Pods for testing
+    xctest_pods
+  end
+
+  target 'IDN-MovieUITests' do
+    # Pods for testing
+  end
 
 end

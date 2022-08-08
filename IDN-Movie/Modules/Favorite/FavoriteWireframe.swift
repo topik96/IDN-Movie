@@ -24,6 +24,9 @@ final class FavoriteWireframe: BaseWireframe {
 
 extension FavoriteWireframe: FavoriteWireframeInterface {
     func navigate(to option: FavoriteNavigationOption) {
-        
+        switch option {
+        case .movieDetail(let movie):
+            navigationController?.pushWireframe(MovieDetailWireframe(movie: movie))
+        }
     }
 }

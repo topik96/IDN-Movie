@@ -14,6 +14,8 @@ enum IDNIcon {
     case search
     case favorite
     case filter
+    case saveRed
+    case saveWhite
     case noNetwork
 }
 
@@ -30,6 +32,10 @@ struct IDNImage {
             return UIImage(named: "favorite")
         case .filter:
             return UIImage(named: "filter")
+        case .saveRed:
+            return UIImage(named: "saveRed")
+        case .saveWhite:
+            return UIImage(named: "saveWhite")
         case .noNetwork:
             return UIImage(named: "")
         }

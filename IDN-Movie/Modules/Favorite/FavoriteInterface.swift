@@ -8,7 +8,7 @@
 import Foundation
 
 enum FavoriteNavigationOption {
-   
+    case movieDetail(Movie)
 }
 
 protocol FavoriteWireframeInterface: WireframeInterface {
@@ -16,11 +16,12 @@ protocol FavoriteWireframeInterface: WireframeInterface {
 }
 
 protocol FavoriteViewInterface: ViewInterface {
-    
+    func reloadData()
 }
 
 protocol FavoritePresenterInterface: PresenterInterface {
-   
+    var viewModel: FavoriteViewModel? { get }
+    func didMovieItemTapped(movie: Movie)
 }
 
 protocol FavoriteInteractorInterface: InteractorInterface {

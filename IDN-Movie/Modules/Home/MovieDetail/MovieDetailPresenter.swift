@@ -67,10 +67,29 @@ final class MovieDetailPresenter {
             }
         }
     }
+    
+    private func _isMovieSaved() -> Bool {
+        guard let _movie = _movie, let id = _movie.id else { return false }
+        if let _ = CoreDataUtils.retrieveMovie(parameter: id) {
+            return true
+        }
+        return false
+    }
 }
 
 extension MovieDetailPresenter: MovieDetailPresenterInterface {
     func viewDidLoad() {
         _retrieveMovieDetail()
+        _view.updateSaveMovieStatus(_isMovieSaved())
+    }
+    
+    func didSaveButtonTapped() {
+        guard let _movie = _movie, let id = _movie.id else { return }
+        if _isMovieSaved() {
+            CoreDataUtils.deleteMovie(parameter: id)
+        } else {
+            CoreDataUtils.insertMovie(_movie)
+        }
+        _view.updateSaveMovieStatus(_isMovieSaved())
     }
 }

@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import SkeletonView
 
 class SearchViewController: BaseViewController {
     
@@ -41,6 +40,12 @@ class SearchViewController: BaseViewController {
             self.presenter.didSearchButtonTapped(title: title)
         }
     }
+    
+    private func _getMovieItem(_ indexPath: IndexPath) -> Movie {
+        guard let item = presenter.viewModel?.items[indexPath.section] as? SearchViewModelResultItem,
+              let model = item.model?[indexPath.row] else { return Movie() }
+        return model
+    }
 }
 
 // MARK: - Extensions -
@@ -50,19 +55,17 @@ extension SearchViewController: SearchViewInterface {
         Dispatch.main { [weak self] in
             guard let self = self else { return }
             self.tableView.reloadData()
-            self.tableView.hideSkeleton()
         }
     }
 }
 
-extension SearchViewController: SkeletonTableViewDataSource, SkeletonTableViewDelegate {
+extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.viewModel?.items[section].rowCount ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let item = presenter.viewModel?.items[indexPath.section] as? SearchViewModelResultItem,
-              let model = item.model?[indexPath.row] else { return UITableViewCell() }
+        let model = _getMovieItem(indexPath)
         let cell = tableView.dequeueReusableCell(ofType: MovieCell.self, for: indexPath)
         cell.setupData(image: model.poster,
                        title: model.title,
@@ -72,16 +75,6 @@ extension SearchViewController: SkeletonTableViewDataSource, SkeletonTableViewDe
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let item = presenter.viewModel?.items[indexPath.section] as? SearchViewModelResultItem,
-              let model = item.model?[indexPath.row] else { return }
-        presenter.didSelectItemTapped(movie: model)
-    }
-    
-    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
-        return "MovieCell"
-    }
-    
-    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        presenter.didSelectItemTapped(movie: _getMovieItem(indexPath))
     }
 }

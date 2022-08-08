@@ -11,5 +11,5 @@ import CoreData
 
 @objc(MovieData)
 public class MovieData: NSManagedObject {
-
+    
 }

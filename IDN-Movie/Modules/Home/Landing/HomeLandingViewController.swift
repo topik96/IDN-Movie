@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 import Kingfisher
-import SkeletonView
 
 class HomeLandingViewController: BaseViewController {
     
@@ -40,8 +39,6 @@ class HomeLandingViewController: BaseViewController {
         if #available(iOS 15.0, *) {
             tableView.sectionHeaderTopPadding = 0.0
         }
-        tableView.isSkeletonable = true
-        tableView.showAnimatedSkeleton()
     }
 }
 
@@ -52,12 +49,11 @@ extension HomeLandingViewController: HomeLandingViewInterface {
         Dispatch.main { [weak self] in
             guard let self = self else { return }
             self.tableView.reloadData()
-            self.tableView.hideSkeleton()
         }
     }
 }
 
-extension HomeLandingViewController: SkeletonTableViewDataSource, SkeletonTableViewDelegate {
+extension HomeLandingViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return presenter.viewModel?.items.count ?? 0
     }
@@ -82,17 +78,9 @@ extension HomeLandingViewController: SkeletonTableViewDataSource, SkeletonTableV
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 45
     }
-    
-    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
-    }
-    
-    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
-        return String(describing: MovieCollectionCell.self)
-    }
 }
 
-extension HomeLandingViewController: SkeletonCollectionViewDataSource, SkeletonCollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension HomeLandingViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let item = presenter.viewModel?.items[collectionView.tag] as? HomeLandingMovieItem else { return 0 }
         return item.model?.count ?? 0
@@ -118,14 +106,6 @@ extension HomeLandingViewController: SkeletonCollectionViewDataSource, SkeletonC
         guard let item = presenter.viewModel?.items[collectionView.tag] as? HomeLandingMovieItem,
               let model = item.model?[indexPath.item] else { return }
         presenter.didPosterItemTapped(movie: model)
-    }
-    
-    func collectionSkeletonView(_ skeletonView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
-    }
-    
-    func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
-        return String(describing: PosterCell.self)
     }
 }
 

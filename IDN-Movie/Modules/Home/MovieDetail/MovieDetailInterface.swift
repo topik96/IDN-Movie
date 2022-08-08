@@ -18,10 +18,12 @@ protocol MovieDetailWireframeInterface: WireframeInterface {
 
 protocol MovieDetailViewInterface: ViewInterface {
     func reloadData()
+    func updateSaveMovieStatus(_ isSaved: Bool)
 }
 
 protocol MovieDetailPresenterInterface: PresenterInterface {
     var movieHeaderModel: MovieHeaderModel? { get }
+    func didSaveButtonTapped()
 }
 
 protocol MovieDetailInteractorInterface: InteractorInterface {
