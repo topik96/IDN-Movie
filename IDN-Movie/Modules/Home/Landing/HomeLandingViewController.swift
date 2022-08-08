@@ -21,11 +21,6 @@ class HomeLandingViewController: BaseViewController {
     
     // MARK: - Life Cycles -
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        _setupNavigationBar()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         _setupTableView()

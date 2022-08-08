@@ -10,7 +10,12 @@ import UIKit
 
 class BaseViewController: UIViewController {
     
+    // MARK: - Properties -
+    
+    var statusBarView: UIView?
+    
     // MARK: - Life Cycle -
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -34,6 +39,7 @@ class BaseViewController: UIViewController {
             let statusbarView = UIView()
             statusbarView.backgroundColor = IDNColor().getColor(.basicLightGray)
             view.addSubview(statusbarView)
+            self.statusBarView = statusbarView
             
             statusbarView.translatesAutoresizingMaskIntoConstraints = false
             statusbarView.heightAnchor
@@ -46,8 +52,9 @@ class BaseViewController: UIViewController {
                 .constraint(equalTo: view.centerXAnchor).isActive = true
             
         } else {
-            let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
-            statusBar?.backgroundColor = IDNColor().getColor(.basicLightGray)
+            let statusBarView = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
+            statusBarView?.backgroundColor = IDNColor().getColor(.basicLightGray)
+            self.statusBarView = statusBarView
         }
     }
     

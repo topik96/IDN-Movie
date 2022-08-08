@@ -7,12 +7,9 @@
 
 import Foundation
 
-protocol HomeLandingViewModelItem {
-    var sectionTitle: String? { get }
-    var rowCount: Int { get }
+protocol HomeLandingViewModelItem: ViewModelInterface {
+   
 }
-
-
 
 struct HomeLandingMovieItem: HomeLandingViewModelItem {
     var sectionTitle: String?
@@ -26,7 +23,9 @@ struct HomeLandingViewModel {
     var items = [HomeLandingViewModelItem]()
     
     init(series: [Movie], movies: [Movie]) {
-        items.append(HomeLandingMovieItem(sectionTitle: "New Series", model: series))
-        items.append(HomeLandingMovieItem(sectionTitle: "Movies", model: movies))
+        if series.count > 0 && movies.count > 0 {
+            items.append(HomeLandingMovieItem(sectionTitle: "New Series", model: series))
+            items.append(HomeLandingMovieItem(sectionTitle: "Movies", model: movies))
+        }
     }
 }

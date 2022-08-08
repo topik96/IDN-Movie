@@ -24,6 +24,9 @@ final class SearchWireframe: BaseWireframe {
 
 extension SearchWireframe: SearchWireframeInterface {
     func navigate(to option: SearchNavigationOption) {
-        
+        switch option {
+        case .movieDetail(let movie):
+            navigationController?.pushWireframe(MovieDetailWireframe(movie: movie))
+        }
     }
 }

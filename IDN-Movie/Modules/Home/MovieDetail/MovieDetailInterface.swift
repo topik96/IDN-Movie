@@ -17,11 +17,11 @@ protocol MovieDetailWireframeInterface: WireframeInterface {
 }
 
 protocol MovieDetailViewInterface: ViewInterface {
-    
+    func reloadData()
 }
 
 protocol MovieDetailPresenterInterface: PresenterInterface {
-    
+    var movieHeaderModel: MovieHeaderModel? { get }
 }
 
 protocol MovieDetailInteractorInterface: InteractorInterface {

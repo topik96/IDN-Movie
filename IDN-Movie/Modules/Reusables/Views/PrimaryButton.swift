@@ -8,6 +8,7 @@
 import UIKit
 
 public typealias ButtonEventHandler = () -> Void
+public typealias ButtonEventWithParameterHandler = (Any) -> Void
 
 public struct ButtonModel {
     let titleText: String?

@@ -45,17 +45,20 @@ final class APIService<T: Codable> {
                                      headers: setup.headers).responseJSON(completionHandler: { response in
                 switch response.result {
                 case .success(let json):
-                    print("SUCCES RESPONSE => \(json)")
-                    do {
-                        guard let data = response.data else { return }
-                        let decoder = JSONDecoder()
-                        let model = try decoder.decode(T.self, from: data)
-                        completion(model, nil)
-                    } catch let error as NSError {
+                    if let dictonary = json as? [String: Any], dictonary.keys.contains(where: { $0 == "Error" }) {
+                        let error = NSError(domain: "", code: IDNErrorCode.errorResponse.rawValue, userInfo: [NSLocalizedDescriptionKey: dictonary["Error"] as? String ?? "-"])
                         completion(nil, error)
+                    } else {
+                        do {
+                            guard let data = response.data else { return }
+                            let decoder = JSONDecoder()
+                            let model = try decoder.decode(T.self, from: data)
+                            completion(model, nil)
+                        } catch let error as NSError {
+                            completion(nil, error)
+                        }
                     }
                 case .failure(let error):
-                    print("ERROR RESPONSE => \(error)")
                     if let error = error as NSError? {
                         completion(nil, error)
                     }

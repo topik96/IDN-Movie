@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 extension UINavigationController {
-    func pushWireframe(_ wireframe: BaseWireframe, hideTabBar: Bool = false, animated: Bool = true) {
+    func pushWireframe(_ wireframe: BaseWireframe, hideTabBar: Bool = true, animated: Bool = true) {
         let vc = wireframe.viewController
         vc.hidesBottomBarWhenPushed = hideTabBar
         if NetworkUtils.isConnectedToNetwork() {

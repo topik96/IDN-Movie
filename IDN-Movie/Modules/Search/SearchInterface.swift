@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import Alamofire
 
 enum SearchNavigationOption {
-   
+    case movieDetail(Movie?)
 }
 
 protocol SearchWireframeInterface: WireframeInterface {
@@ -16,14 +17,17 @@ protocol SearchWireframeInterface: WireframeInterface {
 }
 
 protocol SearchViewInterface: ViewInterface {
-    
+    func reloadData()
 }
 
 protocol SearchPresenterInterface: PresenterInterface {
-   
+    var viewModel: SearchViewModel? { get }
+    func didSelectItemTapped(movie: Movie)
+    func didSearchButtonTapped(title: String)
 }
 
 protocol SearchInteractorInterface: InteractorInterface {
-   
+    @discardableResult
+    func retrieveMovieSearch(paramRequest: MovieParamRequest, completion: @escaping IDNResponse<BaseSearch>) -> DataRequest
 }
 
