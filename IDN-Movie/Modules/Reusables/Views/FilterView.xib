@@ -46,8 +46,8 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="Dun-gb-7Ls"/>
                     </constraints>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain"/>
                 </button>
                 <pickerView contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="rUc-iG-zG9">
                     <rect key="frame" x="16" y="68" width="382" height="67"/>
