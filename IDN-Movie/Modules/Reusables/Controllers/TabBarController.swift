@@ -14,9 +14,15 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBar.isTranslucent = false
-        tabBar.unselectedItemTintColor = IDNColor().getColor(.basicWhite)
         tabBar.tintColor = IDNColor().getColor(.basicRed)
         tabBar.backgroundColor = IDNColor().getColor(.basicLightGray)
+        if #available(iOS 15.0, *) {
+            let appearance = UITabBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = IDNColor().getColor(.basicLightGray)
+            tabBar.standardAppearance = appearance
+            tabBar.scrollEdgeAppearance = appearance
+        }
     }
 }
 

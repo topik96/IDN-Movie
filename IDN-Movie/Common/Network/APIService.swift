@@ -11,7 +11,7 @@ import Alamofire
 typealias IDNResponse<T: Codable> = (T?, Error?) -> Void
 
 protocol APIConfig {
-    var endpoint: String { get set }
+    var endpoint: String { get set}
     var method: HTTPMethod { get set }
     var params: Parameters? { get set }
     var encoding: ParameterEncoding { get set }
@@ -20,11 +20,18 @@ protocol APIConfig {
 
 extension APIConfig {
     var method: HTTPMethod {
-        return .get
+        get { return .get }
+        set { }
     }
     
     var headers: HTTPHeaders {
-        return [:]
+        get { return [:] }
+        set { }
+    }
+    
+    var encoding: ParameterEncoding {
+        get { return URLEncoding.default }
+        set { }
     }
 }
 
@@ -37,14 +44,19 @@ final class APIService<T: Codable> {
                                      encoding: setup.encoding,
                                      headers: setup.headers).responseJSON(completionHandler: { response in
                 switch response.result {
-                case .success(_):
-                    do {
-                        guard let data = response.data else { return }
-                        let decoder = JSONDecoder()
-                        let model = try decoder.decode(T.self, from: data)
-                        completion(model, nil)
-                    } catch let error as NSError {
+                case .success(let json):
+                    if let dictonary = json as? [String: Any], dictonary.keys.contains(where: { $0 == "Error" }) {
+                        let error = NSError(domain: "", code: IDNErrorCode.errorResponse.rawValue, userInfo: [NSLocalizedDescriptionKey: dictonary["Error"] as? String ?? "-"])
                         completion(nil, error)
+                    } else {
+                        do {
+                            guard let data = response.data else { return }
+                            let decoder = JSONDecoder()
+                            let model = try decoder.decode(T.self, from: data)
+                            completion(model, nil)
+                        } catch let error as NSError {
+                            completion(nil, error)
+                        }
                     }
                 case .failure(let error):
                     if let error = error as NSError? {

@@ -9,4 +9,5 @@ import Foundation
 
 enum IDNErrorCode: Int, Error {
     case noConnection = -1009
+    case errorResponse = -999
 }

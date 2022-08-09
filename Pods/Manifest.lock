@@ -1,24 +1,24 @@
 PODS:
   - Alamofire (4.9.1)
+  - EmptyStateKit (1.1.0)
   - Kingfisher (7.3.0)
-  - SkeletonView (1.29.2)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
+  - EmptyStateKit
   - Kingfisher
-  - SkeletonView
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - EmptyStateKit
     - Kingfisher
-    - SkeletonView
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  EmptyStateKit: dc41e9ce5c6089f67a49d063bce73ade9f2ba73f
   Kingfisher: cdb1189a9223b1bc028816bd47c8b8101a58831c
-  SkeletonView: 915a80ecc2b6421ab7ac0f0212321c0cc1406472
 
-PODFILE CHECKSUM: c3cd63ad2dddc9a7b8a2045e27bf0607064e80cd
+PODFILE CHECKSUM: 1b5bedbc7fa1776adaacac8cf203cd2dba43846b
 
 COCOAPODS: 1.11.2

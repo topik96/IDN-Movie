@@ -11,11 +11,11 @@ final class MovieDetailWireframe: BaseWireframe {
     
     // MARK: - Life Cycle -
     
-    init() {
+    init(movie: Movie?) {
         let moduleViewController = MovieDetailViewController()
         super.init(viewController: moduleViewController)
         let interactor = MovieDetailInteractor()
-        let presenter = MovieDetailPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
+        let presenter = MovieDetailPresenter(view: moduleViewController, interactor: interactor, wireframe: self, movie: movie)
         moduleViewController.presenter = presenter
     }
 }

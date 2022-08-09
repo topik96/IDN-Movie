@@ -11,14 +11,18 @@ import Alamofire
 final class HomeLandingRemoteRepo {
     struct HomeLandingConfig: APIConfig {
         var endpoint: String = Endpoints.omdb.url
-        var method: HTTPMethod = .get
-        var params: Parameters? = nil
-        var encoding: ParameterEncoding = URLEncoding.default
-        var headers: HTTPHeaders = [:]
+        var params: Parameters?
+        
+        init(params: Parameters) {
+            self.params = params
+        }
     }
     
-//    @discardableResult
-//    func retrieveMoviSearch(completion: IDNResponse<ResponseObject>) -> DataRequest {
-//        return APIService.getObject(setup: HomeLandingConfig(), completion: completion)
-//    }
+    @discardableResult
+    func retrieveMovieSearch(paramRequest: MovieParamRequest, completion: @escaping IDNResponse<BaseSearch>) -> DataRequest {
+        if let dictionary = paramRequest.dictionary {
+            return APIService.getObject(setup: HomeLandingConfig(params: dictionary), completion: completion)
+        }
+        return Alamofire.request("//")
+    }
 }

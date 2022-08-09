@@ -25,6 +25,8 @@ class BottomsheetController: UIViewController {
         didSet { newState(_state) }
     }
     
+    var contentView: UIView?
+    
     var isTapToDismiss: Bool = false {
         didSet {
             if isTapToDismiss {
@@ -54,8 +56,8 @@ class BottomsheetController: UIViewController {
     init(contentView: UIView) {
         self.tokens = Tokens.init()
         super.init(nibName: nil, bundle: nil)
-        self._contentView = contentView
-        _containerView.addSubview(self._contentView ?? UIView())
+        self.contentView = contentView
+        _containerView.addSubview(self.contentView ?? UIView())
         updateHeight(contentView: contentView)
         view.addSubview(_outsideView)
         view.addSubview(_containerView)
@@ -63,7 +65,7 @@ class BottomsheetController: UIViewController {
     }
     
     func updateHeight(contentView: UIView) {
-        self._contentView?.anchor(top: _containerView.topAnchor,
+        self.contentView?.anchor(top: _containerView.topAnchor,
                                  leading: _containerView.leadingAnchor,
                                  bottom: _containerView.bottomAnchor,
                                  trailing: _containerView.trailingAnchor,
@@ -89,6 +91,7 @@ class BottomsheetController: UIViewController {
         switch _state {
         case .show:
             performPresentAnimation()
+            _containerView.subviews[0].roundCorners(corners: [.topLeft, .topRight], radius: 10)
         default: break
         }
     }
@@ -122,7 +125,6 @@ private extension BottomsheetController {
     func performPresentAnimation() {
         if self._containerView.isHidden {
             self._containerView.isHidden = false
-            self._containerView.translatesAutoresizingMaskIntoConstraints = true
             let yorigin = self._containerView.frame.origin.y
             self._containerView.frame.origin.y = UIScreen.main.bounds.size.height
             UIView.animate(withDuration: 0.3) { [weak self] in
@@ -138,8 +140,8 @@ private extension BottomsheetController {
             self._containerView.frame.origin.y = UIScreen.main.bounds.size.height
         }, completion: { [weak self] (_) in
             guard let self = self else { return }
-            self._contentView?.removeFromSuperview()
-            self._contentView = nil
+            self.contentView?.removeFromSuperview()
+            self.contentView = nil
             self.dismiss(animated: true, completion: nil)
         })
     }

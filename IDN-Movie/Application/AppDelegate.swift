@@ -13,8 +13,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        setNavigationBarAppearance()
         setTabbarAsRoot()
+        
         return true
     }
 }
@@ -26,6 +28,16 @@ extension AppDelegate {
         initialController.setRootWireframe(TabBarControllerWireframe())
         window?.rootViewController = initialController
         window?.makeKeyAndVisible()
+    }
+    
+    func setNavigationBarAppearance() {
+        if #available(iOS 15.0, *) {
+            let navigationBarAppearance = UINavigationBarAppearance()
+            navigationBarAppearance.configureWithTransparentBackground()
+            UINavigationBar.appearance().standardAppearance = navigationBarAppearance
+            UINavigationBar.appearance().compactAppearance = navigationBarAppearance
+            UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+        }
     }
 }
 

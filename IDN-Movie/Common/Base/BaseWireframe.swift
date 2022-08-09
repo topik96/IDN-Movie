@@ -10,6 +10,17 @@ import UIKit
 
 protocol WireframeInterface {
     func showNoNetworkAlert()
+    func showGeneralErrorAlert(_ message: String?)
+}
+
+extension WireframeInterface {
+    func showNoNetworkAlert() {
+        
+    }
+    
+    func showGeneralErrorAlert() {
+        
+    }
 }
 
 class BaseWireframe {
@@ -35,7 +46,27 @@ extension BaseWireframe {
 }
 
 extension BaseWireframe: WireframeInterface {
+    func showGeneralErrorAlert(_ message: String?) {
+        let contentView = ErrorView()
+        let bottomSheet = BottomsheetController(contentView: contentView)
+        contentView.setupData(image: IDNImage().getImage(.sad),
+                              title: "Oops!",
+                              subtitle: message)
+        contentView.didButtonTapped = {
+            bottomSheet.dismiss()
+        }
+        bottomSheet.present(_viewController)
+    }
+    
     func showNoNetworkAlert() {
-        
+        let contentView = ErrorView()
+        let bottomSheet = BottomsheetController(contentView: contentView)
+        contentView.setupData(image: IDNImage().getImage(.barSignal),
+                              title: "No Connection",
+                              subtitle: "Makesure that you have a good network connection")
+        contentView.didButtonTapped = {
+            bottomSheet.dismiss()
+        }
+        bottomSheet.present(_viewController)
     }
 }
