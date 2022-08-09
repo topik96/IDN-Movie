@@ -7,8 +7,10 @@
 
 import Foundation
 import UIKit
+import EmptyStateKit
 
 protocol ViewInterface {
+    func setEmptyState(_ state: ViewEmptyState)
     func hideProgressHUD(view: UIView)
     func hideProgressHUD(completion: (() -> Void)?)
     func showProgressHUD(showsTransparentLayer: Bool)
@@ -17,6 +19,8 @@ protocol ViewInterface {
 // MARK: - Extensions -
 
 extension ViewInterface {
+    func setEmptyState(_ state: ViewEmptyState) { }
+    
     func hideProgressHUD(view: UIView) { }
     
     func showProgressHUD(showsTransparentLayer: Bool = false) {

@@ -4,6 +4,7 @@
 def main_pods
   pod 'Alamofire', '~> 4.7'
   pod 'Kingfisher'
+  pod 'EmptyStateKit'
 end
 
 def xctest_pods 

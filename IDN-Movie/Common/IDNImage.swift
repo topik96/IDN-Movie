@@ -18,6 +18,7 @@ enum IDNIcon {
     case saveWhite
     case barSignal
     case sad
+    case noData
 }
 
 struct IDNImage {
@@ -41,6 +42,8 @@ struct IDNImage {
             return UIImage(named: "barSignal")
         case .sad:
             return UIImage(named: "sad")
+        case .noData:
+            return UIImage(named: "noData")
         }
     }
 }

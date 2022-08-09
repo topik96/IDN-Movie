@@ -50,7 +50,7 @@ extension BaseWireframe: WireframeInterface {
         let contentView = ErrorView()
         let bottomSheet = BottomsheetController(contentView: contentView)
         contentView.setupData(image: IDNImage().getImage(.sad),
-                              title: "Unfortunately",
+                              title: "Oops!",
                               subtitle: message)
         contentView.didButtonTapped = {
             bottomSheet.dismiss()

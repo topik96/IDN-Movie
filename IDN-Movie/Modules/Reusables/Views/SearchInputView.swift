@@ -14,6 +14,7 @@ class SearchInputView: UIView {
     
     var didFilterTapped: ButtonEventHandler?
     var didSearchButtonTapped: ButtonEventWithParameterHandler?
+    var didUpdateSearchInput: ButtonEventWithParameterHandler?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,6 +40,7 @@ class SearchInputView: UIView {
         textField.becomeFirstResponder()
         imageView.image = IDNImage().getImage(.filter)?.withRenderingMode(.alwaysTemplate)
         imageView.tintColor = IDNColor().getColor(.basicRed)
+        imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(UITapGestureRecognizer(target: self,
                                                               action: #selector(_didFilterTapped)))
     }
@@ -50,6 +52,15 @@ class SearchInputView: UIView {
 
 // MARK: - Extensions -
 extension SearchInputView: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textField.text,
+           let textRange = Range(range, in: text) {
+           let updatedText = text.replacingCharacters(in: textRange, with: string)
+            didUpdateSearchInput?(updatedText)
+        }
+        return true
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         didSearchButtonTapped?(textField.text ?? "")
         return true

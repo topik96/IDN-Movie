@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import EmptyStateKit
 
 final class HomeLandingPresenter {
     
@@ -62,9 +63,12 @@ final class HomeLandingPresenter {
     private func _handleMoviesResult(_ isSeries: Bool, _ response: BaseSearch?, _ error: Error?) {
         if let responseData = response, let data = responseData.search {
             if isSeries {
-                self._seriesData = data
+                _seriesData = data
             } else {
-                self._moviesData = data
+                _moviesData = data
+            }
+            if data.count == 0 {
+                _view.setEmptyState(.noData)
             }
         } else {
             if let err = error as NSError?, err.code == IDNErrorCode.noConnection.rawValue {
@@ -72,6 +76,7 @@ final class HomeLandingPresenter {
             } else {
                 self._wireframe.showGeneralErrorAlert(error?.localizedDescription)
             }
+            _view.setEmptyState(.noData)
         }
     }
     

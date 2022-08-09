@@ -10,6 +10,8 @@ import Alamofire
 
 enum SearchNavigationOption {
     case movieDetail(Movie?)
+    case filterMovie(ButtonEventWithParameterHandler?)
+    case emptyTitle
 }
 
 protocol SearchWireframeInterface: WireframeInterface {
@@ -23,6 +25,8 @@ protocol SearchViewInterface: ViewInterface {
 protocol SearchPresenterInterface: PresenterInterface {
     var viewModel: SearchViewModel? { get }
     func didSelectItemTapped(movie: Movie)
+    func didFilterButtonTapped()
+    func didUpdateSearchInput(title: String)
     func didSearchButtonTapped(title: String)
 }
 

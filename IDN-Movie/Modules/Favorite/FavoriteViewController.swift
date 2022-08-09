@@ -19,6 +19,7 @@ class FavoriteViewController: BaseViewController {
     // MARK: - Life Cycles -
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        _setupEmptyStateView()
         presenter.viewWillAppear(animated: animated)
     }
     
@@ -36,6 +37,13 @@ class FavoriteViewController: BaseViewController {
         tableView.register(UINib(nibName: String(describing: MovieCell.self), bundle: nil), forCellReuseIdentifier: String(describing: MovieCell.self))
     }
     
+    private func _setupEmptyStateView() {
+        didEmptyStateButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            self.presenter.viewWillAppear(animated: true)
+        }
+    }
+    
     private func _getMovieItem(_ indexPath: IndexPath) -> Movie {
         guard let item = presenter.viewModel?.items[indexPath.section] as? FavoriteResultItem,
               let model = item.model?[indexPath.row] else { return Movie() }
@@ -51,6 +59,10 @@ extension FavoriteViewController: FavoriteViewInterface {
             guard let self = self else { return }
             self.tableView.reloadData()
         }
+    }
+    
+    func setEmptyState(_ state: ViewEmptyState) {
+        view.emptyState.show(state)
     }
 }
 

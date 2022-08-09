@@ -23,7 +23,6 @@ class SearchViewController: BaseViewController {
         super.viewDidLoad()
         _setupSearchInput()
         _setupTableView()
-        presenter.viewDidLoad()
     }
     
     private func _setupTableView() {
@@ -35,6 +34,14 @@ class SearchViewController: BaseViewController {
     }
     
     private func _setupSearchInput() {
+        searchInputView.didFilterTapped = { [weak self] in
+            guard let self = self else { return }
+            self.presenter.didFilterButtonTapped()
+        }
+        searchInputView.didUpdateSearchInput = { [weak self] data in
+            guard let self = self, let title = data as? String else { return }
+            self.presenter.didUpdateSearchInput(title: title)
+        }
         searchInputView.didSearchButtonTapped = { [weak self] data in
             guard let self = self, let title = data as? String else { return }
             self.presenter.didSearchButtonTapped(title: title)

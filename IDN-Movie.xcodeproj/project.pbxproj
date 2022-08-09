@@ -97,6 +97,10 @@
 		4AC93FDC28A1885300612006 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC93FDB28A1885300612006 /* LoaderView.swift */; };
 		4AC93FE228A1918400612006 /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AC93FE128A1918400612006 /* ErrorView.xib */; };
 		4AC93FE428A1918E00612006 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC93FE328A1918E00612006 /* ErrorView.swift */; };
+		4AC93FE628A1A73100612006 /* ViewEmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC93FE528A1A73100612006 /* ViewEmptyState.swift */; };
+		4AC93FE828A1B96400612006 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC93FE728A1B96300612006 /* FilterView.swift */; };
+		4AC93FEA28A1B97700612006 /* FilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AC93FE928A1B97700612006 /* FilterView.xib */; };
+		4AC93FEC28A1BE3100612006 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC93FEB28A1BE3000612006 /* Date+Extension.swift */; };
 		5A0232CFE0B7CACD7B24953E /* Pods_IDN_Movie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DB1A43DEFAC8F126576EE41 /* Pods_IDN_Movie.framework */; };
 /* End PBXBuildFile section */
 
@@ -215,6 +219,10 @@
 		4AC93FDB28A1885300612006 /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		4AC93FE128A1918400612006 /* ErrorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorView.xib; sourceTree = "<group>"; };
 		4AC93FE328A1918E00612006 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		4AC93FE528A1A73100612006 /* ViewEmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewEmptyState.swift; sourceTree = "<group>"; };
+		4AC93FE728A1B96300612006 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
+		4AC93FE928A1B97700612006 /* FilterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterView.xib; sourceTree = "<group>"; };
+		4AC93FEB28A1BE3000612006 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		4C0695ED4B750C2B6AD36D2A /* Pods_IDN_MovieTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IDN_MovieTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		65FE519CA7F1B1F4962BC041 /* Pods-IDN-Movie-IDN-MovieUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IDN-Movie-IDN-MovieUITests.release.xcconfig"; path = "Target Support Files/Pods-IDN-Movie-IDN-MovieUITests/Pods-IDN-Movie-IDN-MovieUITests.release.xcconfig"; sourceTree = "<group>"; };
 		7DB1A43DEFAC8F126576EE41 /* Pods_IDN_Movie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IDN_Movie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -289,6 +297,7 @@
 				4A170E22289E74D800C48809 /* IDNInfoPlist.swift */,
 				4A170E24289E76CC00C48809 /* IDNErrorCode.swift */,
 				4AC93FAC28A11D7C00612006 /* CoreDataUtils.swift */,
+				4AC93FE528A1A73100612006 /* ViewEmptyState.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -314,6 +323,7 @@
 				4A170E85289EF97300C48809 /* UITableView+Extension.swift */,
 				4A8B1AFD289FB61E00C37547 /* UICollectionView+Extension.swift */,
 				4A8B1B02289FD0A100C37547 /* Encodable+Extension.swift */,
+				4AC93FEB28A1BE3000612006 /* Date+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -487,6 +497,8 @@
 				4AC93FDB28A1885300612006 /* LoaderView.swift */,
 				4AC93FE128A1918400612006 /* ErrorView.xib */,
 				4AC93FE328A1918E00612006 /* ErrorView.swift */,
+				4AC93FE728A1B96300612006 /* FilterView.swift */,
+				4AC93FE928A1B97700612006 /* FilterView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -731,6 +743,7 @@
 				4A170E7E289EF6D500C48809 /* PosterCell.xib in Resources */,
 				4AA72CAE28A04A6F00B9C18F /* SearchInputView.xib in Resources */,
 				4A170E84289EF83A00C48809 /* HomeLandingView.xib in Resources */,
+				4AC93FEA28A1B97700612006 /* FilterView.xib in Resources */,
 				4A8B1AF1289EFC6D00C37547 /* SingleLabel.xib in Resources */,
 				4AA72CB128A0585E00B9C18F /* MovieDetailView.xib in Resources */,
 				4A170E6E289ED97500C48809 /* NavBarLogoView.xib in Resources */,
@@ -890,6 +903,7 @@
 				4A170E5B289E810600C48809 /* FavoriteInteractor.swift in Sources */,
 				4AA72CB528A06E7800B9C18F /* MovieHeaderView.swift in Sources */,
 				4AC93FDA28A1878E00612006 /* LoaderViewController.swift in Sources */,
+				4AC93FE628A1A73100612006 /* ViewEmptyState.swift in Sources */,
 				4A8B1AF8289F1C3900C37547 /* Movie.swift in Sources */,
 				4A170E57289E80F500C48809 /* FavoriteWireframe.swift in Sources */,
 				4A170E41289E7D3500C48809 /* TabBarItemViewModel.swift in Sources */,
@@ -908,6 +922,7 @@
 				4A170E86289EF97300C48809 /* UITableView+Extension.swift in Sources */,
 				4A170E7A289EED8F00C48809 /* UIViewController+Extension.swift in Sources */,
 				4AC93FDC28A1885300612006 /* LoaderView.swift in Sources */,
+				4AC93FEC28A1BE3100612006 /* Date+Extension.swift in Sources */,
 				4A170E3C289E7B5C00C48809 /* TabBarControllerWireframe.swift in Sources */,
 				4A8B1AFA289FADBB00C37547 /* DispatchQueue+Extension.swift in Sources */,
 				4A170E25289E76CC00C48809 /* IDNErrorCode.swift in Sources */,
@@ -935,6 +950,7 @@
 				4AA72CA328A0336700B9C18F /* SearchViewModel.swift in Sources */,
 				4AA72C9E28A02E3600B9C18F /* MovieCell.swift in Sources */,
 				4A8B1B03289FD0A100C37547 /* Encodable+Extension.swift in Sources */,
+				4AC93FE828A1B96400612006 /* FilterView.swift in Sources */,
 				4A362FB1289D64B300012342 /* AppDelegate.swift in Sources */,
 				4AC93FAD28A11D7C00612006 /* CoreDataUtils.swift in Sources */,
 				4A170E45289E807300C48809 /* MovieDetaillViewController.swift in Sources */,

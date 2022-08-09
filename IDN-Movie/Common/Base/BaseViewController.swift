@@ -7,12 +7,14 @@
 
 import Foundation
 import UIKit
+import EmptyStateKit
 
 class BaseViewController: UIViewController {
     
     // MARK: - Properties -
     
     var statusBarView: UIView?
+    var didEmptyStateButtonTapped: ButtonEventHandler?
     
     // MARK: - Life Cycle -
     
@@ -23,10 +25,10 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         _setupDefaultView()
+        setupViewEmptyState(view)
     }
     
     private func _setupDefaultView() {
-        _setupStatusBar()
         _setupNavigationBar()
         view.backgroundColor = IDNColor().getColor(.basicGray)
     }
@@ -69,5 +71,48 @@ class BaseViewController: UIViewController {
         navigationController?.navigationBar.backgroundColor = IDNColor().getColor(.basicLightGray)
         navigationController?.navigationBar.barTintColor = IDNColor().getColor(.basicWhite)
         navigationController?.navigationBar.tintColor = IDNColor().getColor(.basicWhite)
+    }
+    
+    func setupViewEmptyState(_ inView: UIView) {
+        var format = EmptyStateFormat()
+        format.backgroundColor = IDNColor().getColor(.basicGray)
+        format.imageSize = CGSize(width: 150, height: 150)
+        format.titleAttributes = [.foregroundColor: IDNColor().getColor(.basicWhite)]
+        format.descriptionAttributes = [.foregroundColor: IDNColor().getColor(.basicWhite)]
+        format.buttonColor = IDNColor().getColor(.basicRed)
+        
+        view.emptyState.format = format
+        view.emptyState.delegate = self
+        view.emptyState.dataSource = self
+        _setupStatusBar()
+    }
+}
+
+// MARK: - Extensions -
+
+extension BaseViewController: EmptyStateDataSource, EmptyStateDelegate {
+    func imageForState(_ state: CustomState, inEmptyState emptyState: EmptyState) -> UIImage? {
+        let viewState = state as! ViewEmptyState
+        return viewState.image
+    }
+    
+    func titleForState(_ state: CustomState, inEmptyState emptyState: EmptyState) -> String? {
+        let viewState = state as! ViewEmptyState
+        return viewState.title
+    }
+    
+    func descriptionForState(_ state: CustomState, inEmptyState emptyState: EmptyState) -> String? {
+        let viewState = state as! ViewEmptyState
+        return viewState.description
+    }
+    
+    func titleButtonForState(_ state: CustomState, inEmptyState emptyState: EmptyState) -> String? {
+        let viewState = state as! ViewEmptyState
+        return viewState.titleButton
+    }
+    
+    func emptyState(emptyState: EmptyState, didPressButton button: UIButton) {
+        view.emptyState.hide()
+        didEmptyStateButtonTapped?()
     }
 }

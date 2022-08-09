@@ -33,6 +33,7 @@ final class FavoritePresenter {
     
     private func _setupViewModel() {
         viewModel = FavoriteViewModel(movies: _prepareItems())
+        if _prepareItems().count == 0 { _view.setEmptyState(.noData) }
     }
     
     private func _prepareItems() -> [Movie] {
