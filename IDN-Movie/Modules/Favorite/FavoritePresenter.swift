@@ -59,4 +59,10 @@ extension FavoritePresenter: FavoritePresenterInterface {
     func didMovieItemTapped(movie: Movie) {
         _wireframe.navigate(to: .movieDetail(movie))
     }
+    
+    func didDeleteMovieItem(movie: Movie) {
+        guard let id = movie.id else { return }
+        CoreDataUtils.deleteMovie(parameter: id)
+        _setupViewModel()
+    }
 }

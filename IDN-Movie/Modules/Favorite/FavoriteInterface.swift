@@ -22,6 +22,7 @@ protocol FavoriteViewInterface: ViewInterface {
 protocol FavoritePresenterInterface: PresenterInterface {
     var viewModel: FavoriteViewModel? { get }
     func didMovieItemTapped(movie: Movie)
+    func didDeleteMovieItem(movie: Movie)
 }
 
 protocol FavoriteInteractorInterface: InteractorInterface {

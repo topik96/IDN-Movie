@@ -55,6 +55,7 @@ extension FavoriteViewController: FavoriteViewInterface {
         Dispatch.main { [weak self] in
             guard let self = self else { return }
             self.tableView.reloadData()
+            self.tableView.emptyState.hide()
         }
     }
 }
@@ -76,5 +77,16 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.didMovieItemTapped(movie: _getMovieItem(indexPath))
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .normal, title: "", handler: { [weak self] (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
+            guard let self = self else { return }
+            self.presenter.didDeleteMovieItem(movie: self._getMovieItem(indexPath))
+            success(true)
+        })
+        deleteAction.backgroundColor = IDNColor().getColor(.basicGray)
+        deleteAction.image = IDNImage().getImage(.trashRedFill)
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 }
