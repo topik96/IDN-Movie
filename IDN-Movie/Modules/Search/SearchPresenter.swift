@@ -72,7 +72,7 @@ extension SearchPresenter: SearchPresenterInterface {
         _title = title
     }
     
-    func didSearchButtonTapped(title: String) {
+    func didSearchButtonTapped() {
         _retrieveMovies()
     }
     

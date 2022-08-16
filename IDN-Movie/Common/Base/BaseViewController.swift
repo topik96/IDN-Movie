@@ -14,7 +14,8 @@ class BaseViewController: UIViewController {
     // MARK: - Properties -
     
     var statusBarView: UIView?
-    var didEmptyStateButtonTapped: ButtonEventHandler?
+    
+    private var _emptyView: UIView?
     
     // MARK: - Life Cycle -
     
@@ -25,8 +26,10 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         _setupDefaultView()
-        setupViewEmptyState(view)
+        setupViewEmptyState(in: view)
     }
+    
+    // MARK: - Private Functions -
     
     private func _setupDefaultView() {
         _setupNavigationBar()
@@ -73,18 +76,26 @@ class BaseViewController: UIViewController {
         navigationController?.navigationBar.tintColor = IDNColor().getColor(.basicWhite)
     }
     
-    func setupViewEmptyState(_ view: UIView) {
+    // MARK: - Internal Functions -
+    
+    func setupViewEmptyState(in view: UIView) {
         var format = EmptyStateFormat()
         format.backgroundColor = IDNColor().getColor(.basicGray)
         format.imageSize = CGSize(width: 150, height: 150)
+        format.verticalMargin = 0
         format.titleAttributes = [.foregroundColor: IDNColor().getColor(.basicWhite)]
         format.descriptionAttributes = [.foregroundColor: IDNColor().getColor(.basicWhite)]
         format.buttonColor = IDNColor().getColor(.basicRed)
         
-        view.emptyState.format = format
-        view.emptyState.delegate = self
-        view.emptyState.dataSource = self
+        _emptyView = view
+        _emptyView?.emptyState.format = format
+        _emptyView?.emptyState.delegate = self
+        _emptyView?.emptyState.dataSource = self
         _setupStatusBar()
+    }
+    
+    func didEmptyStateButtonTapped() {
+        // Override function...
     }
 }
 
@@ -112,7 +123,14 @@ extension BaseViewController: EmptyStateDataSource, EmptyStateDelegate {
     }
     
     func emptyState(emptyState: EmptyState, didPressButton button: UIButton) {
-        view.emptyState.hide()
-        didEmptyStateButtonTapped?()
+        _emptyView?.emptyState.hide()
+        didEmptyStateButtonTapped()
     }
 }
+
+extension BaseViewController: ViewInterface {
+    func setEmptyState(_ state: ViewEmptyState) {
+        _emptyView?.emptyState.show(state)
+    }
+}
+

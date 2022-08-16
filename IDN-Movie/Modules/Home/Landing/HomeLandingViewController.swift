@@ -24,7 +24,11 @@ class HomeLandingViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         _setupTableView()
-        _setupEmptyStateView()
+        setupViewEmptyState(in: tableView)
+        presenter.viewDidLoad()
+    }
+    
+    override func didEmptyStateButtonTapped() {
         presenter.viewDidLoad()
     }
     
@@ -36,13 +40,6 @@ class HomeLandingViewController: BaseViewController {
         tableView.register(UINib(nibName: String(describing: MovieCollectionCell.self), bundle: nil), forCellReuseIdentifier: String(describing: MovieCollectionCell.self))
         if #available(iOS 15.0, *) {
             tableView.sectionHeaderTopPadding = 0.0
-        }
-    }
-    
-    private func _setupEmptyStateView() {
-        didEmptyStateButtonTapped = { [weak self] in
-            guard let self = self else { return }
-            self.presenter.viewDidLoad()
         }
     }
 }
@@ -58,10 +55,6 @@ extension HomeLandingViewController: HomeLandingViewInterface {
                               options: .transitionFlipFromTop,
                               animations: { self.tableView.reloadData() })
         }
-    }
-    
-    func setEmptyState(_ state: ViewEmptyState) {
-        view.emptyState.show(state)
     }
 }
 

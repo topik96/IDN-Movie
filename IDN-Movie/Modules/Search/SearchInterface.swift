@@ -27,7 +27,7 @@ protocol SearchPresenterInterface: PresenterInterface {
     func didSelectItemTapped(movie: Movie)
     func didFilterButtonTapped()
     func didUpdateSearchInput(title: String)
-    func didSearchButtonTapped(title: String)
+    func didSearchButtonTapped()
 }
 
 protocol SearchInteractorInterface: InteractorInterface {

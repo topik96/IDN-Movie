@@ -19,13 +19,17 @@ class FavoriteViewController: BaseViewController {
     // MARK: - Life Cycles -
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        _setupEmptyStateView()
         presenter.viewWillAppear(animated: animated)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         _setupTableView()
+        setupViewEmptyState(in: tableView)
+    }
+    
+    override func didEmptyStateButtonTapped() {
+        self.presenter.viewWillAppear(animated: true)
     }
     
     private func _setupTableView() {
@@ -35,13 +39,6 @@ class FavoriteViewController: BaseViewController {
         tableView.backgroundColor = .clear
         tableView.contentInset = UIEdgeInsets(top: 24, left: 0, bottom: 0, right: 0)
         tableView.register(UINib(nibName: String(describing: MovieCell.self), bundle: nil), forCellReuseIdentifier: String(describing: MovieCell.self))
-    }
-    
-    private func _setupEmptyStateView() {
-        didEmptyStateButtonTapped = { [weak self] in
-            guard let self = self else { return }
-            self.presenter.viewWillAppear(animated: true)
-        }
     }
     
     private func _getMovieItem(_ indexPath: IndexPath) -> Movie {
@@ -59,10 +56,6 @@ extension FavoriteViewController: FavoriteViewInterface {
             guard let self = self else { return }
             self.tableView.reloadData()
         }
-    }
-    
-    func setEmptyState(_ state: ViewEmptyState) {
-        view.emptyState.show(state)
     }
 }
 
