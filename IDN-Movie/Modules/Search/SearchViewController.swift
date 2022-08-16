@@ -67,6 +67,7 @@ extension SearchViewController: SearchViewInterface {
         Dispatch.main { [weak self] in
             guard let self = self else { return }
             self.tableView.reloadData()
+            self.tableView.emptyState.hide()
         }
     }
 }

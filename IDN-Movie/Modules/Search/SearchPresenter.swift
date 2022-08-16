@@ -60,6 +60,7 @@ final class SearchPresenter {
             } else {
                 _wireframe.showGeneralErrorAlert(error?.localizedDescription)
             }
+            _updateMovieItems([])
             _view.setEmptyState(.noData)
         }
     }
