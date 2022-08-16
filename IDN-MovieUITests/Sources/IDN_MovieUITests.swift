@@ -27,6 +27,7 @@ class IDN_MovieUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
 
+        Thread.sleep(forTimeInterval: 0.8)
         app.collectionViews.cells.element(boundBy: 0).tap()
         XCTAssertTrue(app.tables["tableView"].exists)
     }

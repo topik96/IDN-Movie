@@ -98,6 +98,7 @@ extension MovieDetailViewController: MovieDetailViewInterface {
             guard let self = self else { return }
             self.tableView.reloadData()
             self._setupHeaderView()
+            self._updateFooterConstraint()
         }
     }
     

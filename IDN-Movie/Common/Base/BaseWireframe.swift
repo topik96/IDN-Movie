@@ -18,7 +18,7 @@ extension WireframeInterface {
         
     }
     
-    func showGeneralErrorAlert() {
+    func showGeneralErrorAlert(_ message: String?) {
         
     }
 }

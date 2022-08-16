@@ -73,7 +73,7 @@ class BaseViewController: UIViewController {
         navigationController?.navigationBar.tintColor = IDNColor().getColor(.basicWhite)
     }
     
-    func setupViewEmptyState(_ inView: UIView) {
+    func setupViewEmptyState(_ view: UIView) {
         var format = EmptyStateFormat()
         format.backgroundColor = IDNColor().getColor(.basicGray)
         format.imageSize = CGSize(width: 150, height: 150)
