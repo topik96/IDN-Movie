@@ -1,7 +1,7 @@
 PODS:
   - Alamofire (4.9.1)
   - EmptyStateKit (1.1.0)
-  - Kingfisher (7.3.0)
+  - Kingfisher (7.10.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
@@ -17,8 +17,8 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   EmptyStateKit: dc41e9ce5c6089f67a49d063bce73ade9f2ba73f
-  Kingfisher: cdb1189a9223b1bc028816bd47c8b8101a58831c
+  Kingfisher: a18f05d3b6d37d8650ee4a3e61d57a28fc6207f6
 
-PODFILE CHECKSUM: 1b5bedbc7fa1776adaacac8cf203cd2dba43846b
+PODFILE CHECKSUM: 5b4c98c8387db2de2561c6f6088f669eb3b1686f
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.12.1

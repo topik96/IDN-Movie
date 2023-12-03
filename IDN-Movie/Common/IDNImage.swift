@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-enum IDNIcon {
+enum IDNIcon: String {
     case logo
     case home
     case search
@@ -24,29 +24,6 @@ enum IDNIcon {
 
 struct IDNImage {
     func getImage(_ icon: IDNIcon) -> UIImage? {
-        switch icon {
-        case .logo:
-            return UIImage(named: "logo")
-        case .home:
-            return UIImage(named: "home")
-        case .search:
-            return UIImage(named: "search")
-        case .save:
-            return UIImage(named: "save")
-        case .filter:
-            return UIImage(named: "filter")
-        case .saveRed:
-            return UIImage(named: "saveRed")
-        case .saveWhite:
-            return UIImage(named: "saveWhite")
-        case .barSignal:
-            return UIImage(named: "barSignal")
-        case .sad:
-            return UIImage(named: "sad")
-        case .noData:
-            return UIImage(named: "noData")
-        case .trashRedFill:
-            return UIImage(named: "trashRedFill")
-        }
+        return UIImage(named: icon.rawValue)
     }
 }
